@@ -1,7 +1,5 @@
 <script setup>
-import AccordionComponent from "./AccordionComponent.vue";
-import {ACCORDION_DATA} from "../use/constants.js";
-import {computed, h, ref, useSlots} from "vue";
+import {computed, useSlots} from "vue";
 
 const emits = defineEmits([
     'updated'
@@ -24,11 +22,6 @@ const openedIndexItem = computed({
   }
 })
 
-const render = () => {
-  return h("div", {}, slots.default ? slots.default() : null);
-};
-
-console.log(slots.default())
 </script>
 
 <template>
@@ -41,14 +34,6 @@ console.log(slots.default())
                @closed="openedIndexItem = null"
     >
     </component>
-<!--      <AccordionComponent :itemData="item"-->
-<!--                          :index="index"-->
-<!--                          :isOpen="openedItemIndex === index"-->
-<!--                          @closed="openedItemIndex = null"-->
-<!--                          @opened="openedItemIndex = index"-->
-<!--                          v-for="(item, index) of ACCORDION_DATA"-->
-<!--                          :key="index"/>-->
-
     </div>
 </template>
 

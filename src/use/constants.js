@@ -2,9 +2,9 @@ export const ACCORDION_DATA = [
     {
         head: 'The analysis',
         list: [
-            '1Do you have one user in more than one variant of the same AB test?',
-            '1Are you users actually getting the treatment we expect them to get?',
-            '1Do we have enough users in our AB test? Are those users representative for the total population?',
+            'Do you have one user in more than one variant of the same AB test?',
+            'Are you users actually getting the treatment we expect them to get?',
+            'Do we have enough users in our AB test? Are those users representative for the total population?',
         ]
     },
     {

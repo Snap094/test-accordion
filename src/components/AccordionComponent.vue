@@ -1,7 +1,5 @@
 <script setup>
-import {ref} from 'vue'
 import ArrowComponent from "./ArrowComponent.vue";
-import AccordionTab from "./AccordionTab.vue";
 
 const emits = defineEmits([
     'opened', 'closed'
