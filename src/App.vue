@@ -2,14 +2,10 @@
 import AccordionWrap from "./components/AccordionWrap.vue";
 import AccordionComponent from "./components/AccordionComponent.vue"
 import {ACCORDION_DATA} from "./use/constants.js";
-import {ref} from "vue";
 import AccordionTab from "./components/AccordionTab.vue";
+import {useAccordion} from "./use/accordeon.js";
 
-const activeAccordionItem = ref(null)
-
-const accordionUpdated = (index) => {
-  activeAccordionItem.value = index
-}
+const { activeAccordionItem, accordionUpdated } = useAccordion()
 
 </script>
 
