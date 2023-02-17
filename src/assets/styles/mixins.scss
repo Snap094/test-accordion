@@ -1,0 +1,18 @@
+//media query mixins
+@mixin media-sm {
+  @media (min-width: $width-sm) {
+    @content
+  }
+}
+
+@mixin media-md {
+  @media (min-width: $width-md) {
+    @content
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: $width-lg) {
+    @content
+  }
+}
