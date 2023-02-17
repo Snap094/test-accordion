@@ -1,14 +1,13 @@
 <script setup>
 
 defineProps({
-  itemTab: Object,
-  isClicked: Boolean
+  itemTab: Array,
 })
 
 </script>
 
 <template>
-  <ul class="accordion-tab"  v-show="isClicked">
+  <ul class="accordion-tab">
     <li class="accordion-tab__item typography_body2" v-for="(item, index) in itemTab" :key="index">{{ item }}</li>
   </ul>
 </template>

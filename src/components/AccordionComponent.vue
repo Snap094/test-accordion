@@ -3,13 +3,22 @@ import {ref} from 'vue'
 import ArrowComponent from "./ArrowComponent.vue";
 import AccordionTab from "./AccordionTab.vue";
 
+const emits = defineEmits([
+    'opened', 'closed'
+])
+
 const props = defineProps({
   itemData: Object,
-  index: Number
+  isOpen: Boolean
 })
 
-const isOpen = ref(false)
-const test = ref(null)
+const onClick = () => {
+  if (props.isOpen) {
+    emits('closed')
+  } else {
+    emits('opened')
+  }
+}
 
 const startAnimation = (el) => {
   el.style.height = el.scrollHeight + "px";
@@ -20,18 +29,21 @@ const endAnimation = (el) => {
 </script>
 
 <template>
-  <div class="accordion" :class="isOpen ? 'accordion_open' : ''">
-    <div class="accordion__head" :class="isOpen ? 'accordion__head_open' : ''" @click="isOpen = !isOpen">
-      <p class="typography_body1">{{ props.itemData.head }}</p>
-      <ArrowComponent :isClicked="isOpen"/>
+  <div class="accordion" :class="props.isOpen ? 'accordion_open' : ''">
+    <div class="accordion__head" :class="props.isOpen ? 'accordion__head_open' : ''" @click="onClick">
+      <p class="typography_body1">
+        <slot name="header"></slot>
+      </p>
+      <ArrowComponent :isClicked="props.isOpen"/>
     </div>
     <transition name="accordion"
                 @enter="startAnimation"
                 @after-enter="endAnimation"
                 @before-leave="startAnimation"
                 @after-leave="endAnimation">
-      <AccordionTab :itemTab="props.itemData.list"
-                    :isClicked="isOpen"/>
+      <div v-show="props.isOpen">
+        <slot name="body"></slot>
+      </div>
     </transition>
   </div>
 </template>

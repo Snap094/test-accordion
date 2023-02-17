@@ -1,12 +1,54 @@
 <script setup>
 import AccordionComponent from "./AccordionComponent.vue";
 import {ACCORDION_DATA} from "../use/constants.js";
+import {computed, h, ref, useSlots} from "vue";
 
+const emits = defineEmits([
+    'updated'
+])
+
+const props = defineProps({
+  openedIndexItem: {
+    default: 0
+  }
+})
+
+const slots = useSlots();
+
+const openedIndexItem = computed({
+  get() {
+    return props.openedIndexItem
+  },
+  set(newIndexItem) {
+    return emits('updated', newIndexItem)
+  }
+})
+
+const render = () => {
+  return h("div", {}, slots.default ? slots.default() : null);
+};
+
+console.log(slots.default())
 </script>
 
 <template>
   <div class="accordion-wrap">
-      <AccordionComponent :itemData="item" :index="index" v-for="(item, index) of ACCORDION_DATA" :key="index"/>
+    <component v-for="(item, index) of slots.default()"
+               :key="index"
+               :isOpen="openedIndexItem === index"
+               :is="item"
+               @opened="openedIndexItem = index"
+               @closed="openedIndexItem = null"
+    >
+    </component>
+<!--      <AccordionComponent :itemData="item"-->
+<!--                          :index="index"-->
+<!--                          :isOpen="openedItemIndex === index"-->
+<!--                          @closed="openedItemIndex = null"-->
+<!--                          @opened="openedItemIndex = index"-->
+<!--                          v-for="(item, index) of ACCORDION_DATA"-->
+<!--                          :key="index"/>-->
+
     </div>
 </template>
 
